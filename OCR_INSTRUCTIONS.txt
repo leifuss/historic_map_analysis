@@ -1,0 +1,73 @@
+
+================================================================================
+OCR PROCESSING INSTRUCTIONS FOR IDRISI MAP CITY LABELS
+================================================================================
+
+OVERVIEW:
+This directory contains text region crops extracted from the Idrisi map,
+located near each of the 585 detected city symbols. Use these to extract
+city name labels.
+
+FILES:
+------
+- text_crops/          : Directory with 1751 text region images
+                         (city*_original.jpg and city*_enhanced.jpg)
+- transcription_template.csv : Template for recording OCR results
+- text_regions_detected.json : Full data with coordinates
+
+IMAGE NAMING:
+-------------
+  city0123_region0_original.jpg   - Original crop of text near city #123
+  city0123_region0_enhanced.jpg   - Enhanced/preprocessed for OCR
+
+OPTION 1: OFFLINE OCR WITH TESSERACT
+-------------------------------------
+Install Tesseract OCR:
+  Ubuntu/Debian: sudo apt-get install tesseract-ocr tesseract-ocr-lat
+  macOS: brew install tesseract tesseract-lang
+  Windows: Download from https://github.com/UB-Mannheim/tesseract/wiki
+
+Batch process all enhanced images:
+  cd text_crops
+  for f in *_enhanced.jpg; do
+    tesseract "$f" "${f%.jpg}" -l lat+ara+eng
+  done
+
+This creates .txt files with OCR results for each image.
+
+OPTION 2: MANUAL TRANSCRIPTION
+-------------------------------
+1. Open transcription_template.csv in Excel/LibreOffice
+2. For each row:
+   - Open the corresponding image in text_crops/
+   - Type the city name in the 'transcribed_text' column
+   - Add confidence level (high/medium/low) if desired
+   - Add notes for unclear text
+3. Save the CSV
+
+OPTION 3: ONLINE OCR SERVICES
+------------------------------
+Upload images to services like:
+  - Google Cloud Vision API (best accuracy, costs apply)
+  - Microsoft Azure Computer Vision
+  - Amazon Textract
+  - Free services: OnlineOCR.net, NewOCR.com
+
+Then fill results into transcription_template.csv
+
+TIPS FOR ACCURACY:
+------------------
+1. The Idrisi map uses medieval Latin script and Arabic
+2. City names may include diacritical marks (ā, ī, ū, etc.)
+3. Use *_enhanced.jpg for OCR, *_original.jpg for visual verification
+4. Each city may have multiple text regions - use the closest one
+5. Some text may be decorative labels or region names, not city names
+
+NEXT STEPS:
+-----------
+After transcription, create final output with:
+  python3 merge_transcriptions.py transcription_template.csv
+
+This will generate cities_with_labels.json combining coordinates + names.
+
+================================================================================
