@@ -3,6 +3,9 @@ text_crops/
 text_region_samples/
 sample_patches/
 
+# Test/sample files
+transcription_sample.csv
+
 # Python cache
 __pycache__/
 *.pyc
