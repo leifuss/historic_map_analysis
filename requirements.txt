@@ -2,6 +2,7 @@ torch>=2.0.0
 transformers>=4.45.0
 pillow>=10.0.0
 numpy>=1.24.0
+opencv-python>=4.8.0
 qwen-vl-utils>=0.0.8
 accelerate>=0.24.0
 sentencepiece>=0.1.99
