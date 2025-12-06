@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Al-Idrisi's Iberian Routes - From Original Text</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Georgia', serif; }
+        #map { position: absolute; top: 60px; bottom: 0; width: 100%; }
+        .header {
+            position: absolute; top: 0; left: 0; right: 0; height: 60px;
+            background: rgba(139, 90, 43, 0.95); color: white;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3); z-index: 1000;
+        }
+        .header h1 { margin: 0; font-size: 24px; font-weight: normal; }
+        .header .subtitle { font-size: 14px; opacity: 0.9; margin-top: 3px; }
+        .info {
+            padding: 10px 15px; font: 14px/18px Arial; background: rgba(255,255,255,0.95);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 8px; border-left: 4px solid #8b5a2b;
+        }
+        .info h4 { margin: 0 0 8px; color: #8b5a2b; font-size: 16px; }
+        .info p { margin: 5px 0; font-size: 13px; color: #555; }
+        .legend { line-height: 22px; color: #555; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+        .legend h4 { margin: 0 0 8px; color: #8b5a2b; }
+        .legend i { width: 20px; height: 20px; float: left; margin-right: 8px; opacity: 0.8; }
+        .legend .line { width: 30px; height: 3px; }
+        .city-label {
+            font-size: 12px; font-weight: bold; color: #333;
+            text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white, 2px 2px 3px rgba(0,0,0,0.3);
+            font-family: 'Georgia', serif;
+        }
+        .distance-label {
+            font-size: 11px; background: rgba(255,255,255,0.9); padding: 3px 6px;
+            border-radius: 4px; border: 1px solid #8b5a2b; color: #8b5a2b; font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>⁂ Al-Idrisi's Routes of Medieval Iberia - Extracted from Original Text ⁂</h1>
+            <div class="subtitle">Fourth Climate Section - Pages 197-266 (1866 Edition)</div>
+        </div>
+    </div>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([37.709500000000006, -6.4673], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 18
+        }).addTo(map);
+
+        var info = L.control({position: 'topright'});
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this._div.innerHTML =
+                '<h4>Abu Abdullah al-Idrisi (1100-1165)</h4>' +
+                '<p><em>Routes extracted from OCR of original text</em></p>' +
+                '<p>These routes were found in the French translation<br/>' +
+                'of al-Idrisi\'s geographic work describing<br/>' +
+                'the Iberian Peninsula in the 12th century</p>' +
+                '<p style="font-size:11px; margin-top:10px; color:#888;">' +
+                'Distances: milles (miles) or journées (days of travel)</p>';
+            return this._div;
+        };
+        info.addTo(map);
+
+        var locations = {"C\u00e1diz": {"lat": 36.5297, "lon": -6.2929}, "Tarifa": {"lat": 36.0133, "lon": -5.6067}, "Badajoz": {"lat": 38.8794, "lon": -6.9706}, "C\u00f3rdoba": {"lat": 37.8882, "lon": -4.7794}, "Santar\u00e9m": {"lat": 39.2369, "lon": -8.6869}};
+
+        for (var name in locations) {
+            var loc = locations[name];
+            L.circleMarker([loc.lat, loc.lon], {
+                radius: 7, fillColor: "#d4af37", color: "#8b5a2b",
+                weight: 2, opacity: 1, fillOpacity: 0.9
+            })
+            .bindPopup("<b>" + name + "</b><br/><em>Medieval Iberian city</em>")
+            .addTo(map);
+
+            L.marker([loc.lat, loc.lon], {
+                icon: L.divIcon({
+                    className: 'label',
+                    html: '<div class="city-label">' + name + '</div>',
+                    iconSize: [100, 20], iconAnchor: [50, -10]
+                })
+            }).addTo(map);
+        }
+
+        var routes = [{"page": 251, "from_name": "C\u00e1diz", "from_lat": 36.5297, "from_lon": -6.2929, "to_name": "Tarifa", "to_lat": 36.0133, "to_lon": -5.6067, "distance": 63, "unit": "milles", "matched": true, "source": "al-Idrisi Fourth Climate"}, {"page": 255, "from_name": "Badajoz", "from_lat": 38.8794, "from_lon": -6.9706, "to_name": "C\u00f3rdoba", "to_lat": 37.8882, "to_lon": -4.7794, "distance": 6, "unit": "journ\u00e9es", "matched": true, "source": "al-Idrisi Fourth Climate"}, {"page": 261, "from_name": "Santar\u00e9m", "from_lat": 39.2369, "from_lon": -8.6869, "to_name": "Badajoz", "to_lat": 38.8794, "to_lon": -6.9706, "distance": 4, "unit": "journ\u00e9es", "matched": true, "source": "al-Idrisi Fourth Climate"}];
+
+        routes.forEach(function(route) {
+            var latlngs = [[route.from_lat, route.from_lon], [route.to_lat, route.to_lon]];
+
+            var polyline = L.polyline(latlngs, {
+                color: '#8b5a2b', weight: 3, opacity: 0.7, dashArray: '10, 5'
+            }).addTo(map);
+
+            polyline.bindPopup(
+                "<div style='font-family: Georgia, serif;'>" +
+                "<b style='color:#8b5a2b;'>Route:</b> " + route.from_name + " → " + route.to_name + "<br/>" +
+                "<b style='color:#8b5a2b;'>Distance:</b> " + route.distance + " " + route.unit + "<br/>" +
+                "<b style='color:#8b5a2b;'>Source:</b> Page " + route.page + "<br/>" +
+                "<em style='font-size:11px; color:#666;'>From al-Idrisi's original text</em>" +
+                "</div>"
+            );
+
+            var midLat = (route.from_lat + route.to_lat) / 2;
+            var midLon = (route.from_lon + route.to_lon) / 2;
+            L.marker([midLat, midLon], {
+                icon: L.divIcon({
+                    className: 'distance-label-marker',
+                    html: '<div class="distance-label">' + route.distance + ' ' + route.unit + '</div>',
+                    iconSize: [70, 20]
+                })
+            }).addTo(map);
+        });
+
+        var legend = L.control({position: 'bottomright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend');
+            div.innerHTML =
+                '<h4>Legend</h4>' +
+                '<i style="background:#d4af37; border-radius: 50%; border: 2px solid #8b5a2b;"></i> Cities<br>' +
+                '<i class="line" style="background:#8b5a2b;"></i> Trade Routes<br>' +
+                '<hr style="margin: 8px 0;">' +
+                '<div style="font-size:12px; color:#666;">' +
+                '<strong>Routes:</strong> ' + routes.length + '<br>' +
+                '<strong>Cities:</strong> ' + Object.keys(locations).length + '<br>' +
+                '<strong>Source:</strong> OCR Extraction' +
+                '</div>';
+            return div;
+        };
+        legend.addTo(map);
+    </script>
+</body>
+</html>

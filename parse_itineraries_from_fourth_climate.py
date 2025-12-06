@@ -116,7 +116,7 @@ def extract_route_patterns(text: str) -> List[Dict]:
     pattern3 = r'(\d+)\s*(milles?|lieues?|journées?|parasanges?)\s+de\s+([A-ZÀ-ÿa-zà-ÿ\-\'\s]+?)\s+[àa]\s+([A-ZÀ-ÿa-zà-ÿ\-\'\s]+?)[,\.\s]'
 
     # Pattern 4: depuis X jusqu'à Y, distance
-    pattern4 = r'depuis\s+([A-ZÀ-ÿa-zà-ÿ\-\'\s]+?)\s+jusqu[\'']?[àa]\s+([A-ZÀ-ÿa-zà-ÿ\-\'\s]+?)[\s,;:]+(\d+)\s*(milles?|lieues?|journées?)'
+    pattern4 = r'depuis\s+([A-ZÀ-ÿa-zà-ÿ\-\'\s]+?)\s+jusqu[\'\']?[àa]\s+([A-ZÀ-ÿa-zà-ÿ\-\'\s]+?)[\s,;:]+(\d+)\s*(milles?|lieues?|journées?)'
 
     for pattern in [pattern1, pattern2, pattern3, pattern4]:
         matches = re.finditer(pattern, text, re.IGNORECASE)
