@@ -1,0 +1,60 @@
+
+======================================================================
+IBERIAN CONTENT EXTRACTION WITH OCR
+======================================================================
+
+Processing: descriptiondela00goejgoog.pdf
+OCR DPI: 150
+This will take some time...
+
+Scanning 100 pages for Iberian content...
+
+Processing page 0/100...
+  ✓ Page 8: Found Iberian content (espagne)
+Processing page 10/100...
+  ✓ Page 10: Found Iberian content (espagne)
+  ✓ Page 13: Found Iberian content (espagne)
+  ✓ Page 14: Found Iberian content (espagne, cordoue, grenade)
+Processing page 20/100...
+  ✓ Page 23: Found Iberian content (cordoue)
+  ✓ Page 24: Found Iberian content (cordoue)
+  ✓ Page 27: Found Iberian content (espagne)
+  ✓ Page 29: Found Iberian content (valence)
+Processing page 30/100...
+  ✓ Page 30: Found Iberian content (granada)
+  ✓ Page 31: Found Iberian content (cordoue)
+  ✓ Page 32: Found Iberian content (espagne)
+  ✓ Page 36: Found Iberian content (espagne)
+Processing page 40/100...
+Processing page 50/100...
+Processing page 60/100...
+Processing page 70/100...
+Processing page 80/100...
+  ✓ Page 83: Found Iberian content (espagne)
+Processing page 90/100...
+  ✓ Page 92: Found Iberian content (grenade)
+  ✓ Page 98: Found Iberian content (espagne, lisbonne, lisbon)
+
+======================================================================
+EXTRACTION COMPLETE
+======================================================================
+Total pages with Iberian content: 15
+Pages with Arabic text: 11
+
+Saved JSON to: output/iberian_content.json
+Saved Markdown to: output/iberian_content.md
+Saved Arabic text to: output/iberian_arabic.txt
+Saved French text to: output/iberian_french.txt
+
+======================================================================
+SAMPLE FROM FIRST MATCH:
+======================================================================
+
+Page 8
+Keywords: espagne
+
+French text (first 300 chars):
+DESCRIPTION
+DE L'AFRIQUE ET DE L'ESPAGNE.
+
+

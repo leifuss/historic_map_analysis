@@ -8,6 +8,5 @@ PyYAML>=6.0
 # Progress tracking
 tqdm>=4.65.0
 
-# Optional: OCR support (uncomment if needed)
-# pytesseract>=0.3.10
-# pdf2image>=1.16.0
+# OCR support for text extraction
+pytesseract>=0.3.10
