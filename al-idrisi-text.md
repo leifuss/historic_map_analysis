@@ -75,14 +75,61 @@ Al-Idrisi's Tabula Rogeriana represents:
 
 ## Digital Resources
 
-### Original Manuscripts
-- National Library of France (BnF): Original Arabic manuscripts
-- Library of Congress: Digital scans available through World Digital Library
-- Yale University: Kitāb Nuzhat al-mushtāq manuscript (Internet Archive: 1130053.med.yale.edu)
+### Full Text Downloads Available
 
-### Modern Editions
-- French translation on Gallica: https://gallica.bnf.fr/ark:/12148/bpt6k102005m (Volume 5) and https://gallica.bnf.fr/ark:/12148/bpt6k1020060 (Volume 6)
-- Internet Archive: Various editions and studies available
+#### French Translation by Jaubert (1836-1840) - PUBLIC DOMAIN
+
+**Internet Archive** (Multiple formats: PDF, EPUB, Plain Text, etc.):
+- Volume 1: https://archive.org/details/gographiededrisi01idri
+  - Direct PDF: https://archive.org/download/gographiededrisi01idri/gographiededrisi01idri.pdf
+  - Plain Text: https://archive.org/stream/gographiededrisi01idri/gographiededrisi01idri_djvu.txt
+- Volume 2: https://archive.org/details/gographiededrisi02idri
+  - Direct PDF: https://archive.org/download/gographiededrisi02idri/gographiededrisi02idri.pdf
+  - Plain Text: https://archive.org/stream/gographiededrisi02idri/gographiededrisi02idri_djvu.txt
+
+**Wikimedia Commons** (PDF):
+- Volume 2: https://upload.wikimedia.org/wikipedia/commons/2/2b/Edrisi_-_Géographie,_traduite_par_P._Amédée_Jaubert,_tome_second.pdf
+
+**Gallica - Bibliothèque nationale de France**:
+- Volume 5 (Recueil de voyages): https://gallica.bnf.fr/ark:/12148/bpt6k102005m
+  - Multiple download formats available (PDF, EPUB, etc.)
+- Volume 6 (Recueil de voyages): https://gallica.bnf.fr/ark:/12148/bpt6k1020060
+  - Multiple download formats available (PDF, EPUB, etc.)
+
+**HathiTrust Digital Library**:
+- Catalog record: https://catalog.hathitrust.org/Record/101838289
+- Full text view and download available (depending on your location)
+
+#### Arabic Original Manuscripts
+
+**Yale University Manuscript**:
+- Internet Archive: https://archive.org/details/1130053.med.yale.edu
+- Kitāb Nuzhat al-mushtāq - Original Arabic manuscript
+
+**HathiTrust** (Arabic with Italian translation):
+- Min Kitāb Nuzhat al-mushtāq fī ikhtirāq... (Roma: Salviucci, 1883)
+- Catalog: https://catalog.hathitrust.org/Record/009031416
+- Includes facsimile of map of Italy from original Arabic manuscript
+- Arabic text edited and translated into Italian
+
+**National Library of France (BnF)**:
+- Original Arabic manuscripts available in their collections
+- Digital scans may be available through their catalog
+
+**Library of Congress**:
+- World Digital Library: The Excursion of the One Who Yearns to Penetrate the Horizons
+- https://www.loc.gov/item/2021667394/
+- Digital scans available for viewing
+
+### How to Download
+
+1. **From Internet Archive**: Visit the detail pages above, click "Download Options" on the right side, and select your preferred format (PDF, EPUB, Kindle, Plain Text, etc.)
+
+2. **From Gallica**: Visit the links above, click the download icon in the viewer, and choose from PDF, EPUB, or other formats
+
+3. **From Wikimedia Commons**: Click the link to view the PDF, then use your browser's download function or right-click to save
+
+4. **From HathiTrust**: Access may vary by location due to copyright. If available in your region, you can download the full PDF
 
 ## Further Reading
 
