@@ -52,6 +52,7 @@ IBERIAN_LOCATIONS = {
     'santarém': {'lat': 39.2369, 'lon': -8.6869, 'name': 'Santarém'},
     'coimbra': {'lat': 40.2033, 'lon': -8.4103, 'name': 'Coimbra'},
     'coïmbra': {'lat': 40.2033, 'lon': -8.4103, 'name': 'Coimbra'},
+    'coïmbre': {'lat': 40.2033, 'lon': -8.4103, 'name': 'Coimbra'},  # OCR variant
     'porto': {'lat': 41.1579, 'lon': -8.6291, 'name': 'Porto'},
     'évora': {'lat': 38.5714, 'lon': -7.9093, 'name': 'Évora'},
     'evora': {'lat': 38.5714, 'lon': -7.9093, 'name': 'Évora'},
@@ -91,6 +92,57 @@ IBERIAN_LOCATIONS = {
     'écija': {'lat': 37.5428, 'lon': -5.0817, 'name': 'Écija'},
     'ecija': {'lat': 37.5428, 'lon': -5.0817, 'name': 'Écija'},
     'carmona': {'lat': 37.4708, 'lon': -5.6419, 'name': 'Carmona'},
+    # Additional Portuguese cities
+    'silves': {'lat': 37.1875, 'lon': -8.4378, 'name': 'Silves'},
+    'mertola': {'lat': 37.6389, 'lon': -7.6600, 'name': 'Mértola'},
+    'mértola': {'lat': 37.6389, 'lon': -7.6600, 'name': 'Mértola'},
+    'alcácer': {'lat': 38.3733, 'lon': -8.5133, 'name': 'Alcácer do Sal'},
+    'alcacer': {'lat': 38.3733, 'lon': -8.5133, 'name': 'Alcácer do Sal'},
+    'al-caçr': {'lat': 38.3733, 'lon': -8.5133, 'name': 'Alcácer do Sal'},
+    'al-qasr': {'lat': 38.3733, 'lon': -8.5133, 'name': 'Alcácer do Sal'},
+    'beja': {'lat': 38.0150, 'lon': -7.8650, 'name': 'Beja'},
+    'faro': {'lat': 37.0194, 'lon': -7.9304, 'name': 'Faro'},
+    'sagres': {'lat': 37.0081, 'lon': -8.9478, 'name': 'Sagres'},
+    'lagos': {'lat': 37.1028, 'lon': -8.6742, 'name': 'Lagos'},
+    'tavira': {'lat': 37.1267, 'lon': -7.6486, 'name': 'Tavira'},
+    # Additional Spanish cities
+    'huelva': {'lat': 37.2556, 'lon': -6.9497, 'name': 'Huelva'},
+    'huelba': {'lat': 37.2556, 'lon': -6.9497, 'name': 'Huelva'},
+    'niebla': {'lat': 37.3597, 'lon': -6.6797, 'name': 'Niebla'},
+    'calatayud': {'lat': 41.3525, 'lon': -1.6436, 'name': 'Calatayud'},
+    'daroca': {'lat': 41.1147, 'lon': -1.4108, 'name': 'Daroca'},
+    'alpuente': {'lat': 39.8786, 'lon': -1.0044, 'name': 'Alpuente'},
+    'medinaceli': {'lat': 41.1736, 'lon': -2.4378, 'name': 'Medinaceli'},
+    'coria': {'lat': 40.0111, 'lon': -6.5211, 'name': 'Coria'},
+    'albarracín': {'lat': 40.4094, 'lon': -1.4389, 'name': 'Albarracín'},
+    'albarracin': {'lat': 40.4094, 'lon': -1.4389, 'name': 'Albarracín'},
+    'ceuta': {'lat': 35.8894, 'lon': -5.3213, 'name': 'Ceuta'},
+    'baza': {'lat': 37.4903, 'lon': -2.7728, 'name': 'Baza'},
+    'guadix': {'lat': 37.3050, 'lon': -3.1383, 'name': 'Guadix'},
+    'loja': {'lat': 37.1622, 'lon': -4.1428, 'name': 'Loja'},
+    'osuna': {'lat': 37.2342, 'lon': -5.1031, 'name': 'Osuna'},
+    'jerez': {'lat': 36.6861, 'lon': -6.1369, 'name': 'Jerez'},
+    'medina-sidonia': {'lat': 36.4597, 'lon': -5.9283, 'name': 'Medina-Sidonia'},
+    'arcos': {'lat': 36.7500, 'lon': -5.8069, 'name': 'Arcos de la Frontera'},
+    'sanlúcar': {'lat': 36.7783, 'lon': -6.3528, 'name': 'Sanlúcar de Barrameda'},
+    'sanlucar': {'lat': 36.7783, 'lon': -6.3528, 'name': 'Sanlúcar de Barrameda'},
+    # Central Spanish cities
+    'talavera': {'lat': 39.9635, 'lon': -4.8303, 'name': 'Talavera de la Reina'},
+    'medellin': {'lat': 38.9733, 'lon': -5.9683, 'name': 'Medellín'},
+    'truxillo': {'lat': 39.4667, 'lon': -5.8833, 'name': 'Trujillo'},
+    'trujillo': {'lat': 39.4667, 'lon': -5.8833, 'name': 'Trujillo'},
+    'plasencia': {'lat': 40.0303, 'lon': -6.0883, 'name': 'Plasencia'},
+    'cacr': {'lat': 38.3733, 'lon': -8.5133, 'name': 'Alcácer do Sal'},  # variant spelling
+    'alpueate': {'lat': 39.8786, 'lon': -1.0044, 'name': 'Alpuente'},  # OCR variant
+    'cantara': {'lat': 39.7197, 'lon': -6.3900, 'name': 'Alcántara'},
+    'alcantara': {'lat': 39.7197, 'lon': -6.3900, 'name': 'Alcántara'},
+    'alcántara': {'lat': 39.7197, 'lon': -6.3900, 'name': 'Alcántara'},
+    # Santa Maria variants (could refer to several locations)
+    'santa-maria': {'lat': 36.5150, 'lon': -6.2758, 'name': 'Santa María del Puerto'},
+    'santa maria': {'lat': 36.5150, 'lon': -6.2758, 'name': 'Santa María del Puerto'},
+    # North African cities mentioned in context with Iberia
+    'fès': {'lat': 34.0181, 'lon': -5.0078, 'name': 'Fez'},
+    'fez': {'lat': 34.0181, 'lon': -5.0078, 'name': 'Fez'},
 }
 
 
@@ -154,6 +206,23 @@ def extract_route_patterns(text: str) -> List[Dict]:
 def match_location(location_name: str) -> Dict:
     """Try to match location name to known coordinates."""
     location_lower = location_name.lower().strip()
+
+    # Skip OCR artifacts and generic terms
+    skip_terms = ['là', 'ce lieu', 'cette ville', 'ce fort', 'cette île', 'station']
+    if location_lower in skip_terms:
+        return None
+
+    # Clean up common trailing phrases - use regex for better matching
+    cleanup_patterns = [
+        r'\s*on compte\s*', r'\s*est de plus de\s*', r'\s*pour se rendre\s*',
+        r'\s*la mer\s*', r'\s*océane\s*', r'^la ville de\s+', r'^celle de\s+',
+        r'^l\'embouchure d\'\s*', r'^la ville d\'\s*'
+    ]
+    for pattern in cleanup_patterns:
+        location_lower = re.sub(pattern, '', location_lower).strip()
+
+    # Remove articles
+    location_lower = re.sub(r'^(la |le |les |l\')', '', location_lower)
 
     # Direct match
     if location_lower in IBERIAN_LOCATIONS:

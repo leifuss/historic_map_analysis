@@ -177,19 +177,29 @@
   },
   {
     "page": 236,
-    "from_name": "ceuta",
-    "to_name": "cacr",
+    "from_name": "Ceuta",
+    "from_lat": 35.8894,
+    "from_lon": -5.3213,
+    "to_name": "Alcácer do Sal",
+    "to_lat": 38.3733,
+    "to_lon": -8.5133,
     "distance": 12,
     "unit": "milles",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 239,
-    "from_name": "ceuta pour se rendre",
-    "to_name": "fès on a",
+    "from_name": "Ceuta",
+    "from_lat": 35.8894,
+    "from_lon": -5.3213,
+    "to_name": "Fez",
+    "to_lat": 34.0181,
+    "to_lon": -5.0078,
     "distance": 8,
     "unit": "journées",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 241,
@@ -230,35 +240,55 @@
   },
   {
     "page": 252,
-    "from_name": "la ville de santa-maria",
-    "to_name": "celle de silves",
+    "from_name": "Santa María del Puerto",
+    "from_lat": 36.515,
+    "from_lon": -6.2758,
+    "to_name": "Silves",
+    "to_lat": 37.1875,
+    "to_lon": -8.4378,
     "distance": 28,
     "unit": "milles",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 253,
-    "from_name": "silves",
-    "to_name": "badajoz",
+    "from_name": "Silves",
+    "from_lat": 37.1875,
+    "from_lon": -8.4378,
+    "to_name": "Badajoz",
+    "to_lat": 38.8794,
+    "to_lon": -6.9706,
     "distance": 3,
     "unit": "journées",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 253,
-    "from_name": "silves",
-    "to_name": "la forteresse de mertola",
+    "from_name": "Silves",
+    "from_lat": 37.1875,
+    "from_lon": -8.4378,
+    "to_name": "Mértola",
+    "to_lat": 37.6389,
+    "to_lon": -7.66,
     "distance": 4,
     "unit": "journées",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 254,
-    "from_name": "silves",
-    "to_name": "al-caçr",
+    "from_name": "Silves",
+    "from_lat": 37.1875,
+    "from_lon": -8.4378,
+    "to_name": "Alcácer do Sal",
+    "to_lat": 38.3733,
+    "to_lon": -8.5133,
     "distance": 4,
     "unit": "journées",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 255,
@@ -275,11 +305,16 @@
   },
   {
     "page": 257,
-    "from_name": "cantara as-saif",
-    "to_name": "coria",
+    "from_name": "Alcántara",
+    "from_lat": 39.7197,
+    "from_lon": -6.39,
+    "to_name": "Coria",
+    "to_lat": 40.0111,
+    "to_lon": -6.5211,
     "distance": 2,
     "unit": "journées",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 257,
@@ -328,19 +363,29 @@
   },
   {
     "page": 261,
-    "from_name": "mérida",
-    "to_name": "medellin",
+    "from_name": "Mérida",
+    "from_lat": 38.9167,
+    "from_lon": -6.3433,
+    "to_name": "Medellín",
+    "to_lat": 38.9733,
+    "to_lon": -5.9683,
     "distance": 2,
     "unit": "journées",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 262,
-    "from_name": "medellin",
-    "to_name": "truxillo",
+    "from_name": "Medellín",
+    "from_lat": 38.9733,
+    "from_lon": -5.9683,
+    "to_name": "Trujillo",
+    "to_lat": 39.4667,
+    "to_lon": -5.8833,
     "distance": 2,
     "unit": "journées",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 262,
@@ -352,26 +397,41 @@
   },
   {
     "page": 265,
-    "from_name": "santa-maria",
-    "to_name": "alpueate",
+    "from_name": "Santa María del Puerto",
+    "from_lat": 36.515,
+    "from_lon": -6.2758,
+    "to_name": "Alpuente",
+    "to_lat": 39.8786,
+    "to_lon": -1.0044,
     "distance": 2,
     "unit": "journées",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 265,
-    "from_name": "medinaceli",
-    "to_name": "calatayud",
+    "from_name": "Medinaceli",
+    "from_lat": 41.1736,
+    "from_lon": -2.4378,
+    "to_name": "Calatayud",
+    "to_lat": 41.3525,
+    "to_lon": -1.6436,
     "distance": 50,
     "unit": "milles",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   },
   {
     "page": 265,
-    "from_name": "daroca",
-    "to_name": "saragosse",
+    "from_name": "Daroca",
+    "from_lat": 41.1147,
+    "from_lon": -1.4108,
+    "to_name": "Zaragoza",
+    "to_lat": 41.6488,
+    "to_lon": -0.8891,
     "distance": 50,
     "unit": "milles",
-    "matched": false
+    "matched": true,
+    "source": "al-Idrisi Fourth Climate"
   }
 ]
