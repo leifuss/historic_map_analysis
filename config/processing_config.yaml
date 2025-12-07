@@ -1,0 +1,48 @@
+# PDF Processing Configuration
+
+processing:
+  # Maximum memory to use for page cache (MB)
+  max_memory_mb: 500
+
+  # Number of pages to keep in cache
+  page_cache_size: 3
+
+  # Default DPI for image extraction
+  default_dpi: 300
+
+  # Maximum DPI allowed
+  max_dpi: 600
+
+  # Number of parallel workers for batch processing
+  parallel_workers: 4
+
+  # Chunk size for batch processing
+  batch_size: 10
+
+output:
+  # Output image format (png, jpeg, tiff)
+  image_format: "png"
+
+  # Compression quality (1-100, for jpeg)
+  compression_quality: 95
+
+  # Create thumbnails
+  create_thumbnails: true
+
+  # Thumbnail dimensions [width, height]
+  thumbnail_size: [200, 200]
+
+  # Output directories
+  image_dir: "output/images"
+  thumbnail_dir: "output/thumbnails"
+  cache_dir: "cache"
+
+logging:
+  # Logging level (DEBUG, INFO, WARNING, ERROR)
+  level: "INFO"
+
+  # Log file path
+  log_file: "output/processing.log"
+
+  # Log to console
+  console_output: true

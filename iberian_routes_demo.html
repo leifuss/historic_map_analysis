@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Al-Idrisi's Iberian Routes - Demonstration Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+        }
+        #map {
+            position: absolute;
+            top: 60px;
+            bottom: 0;
+            width: 100%;
+        }
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(139, 90, 43, 0.95);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+        .info {
+            padding: 10px 15px;
+            font: 14px/18px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            border-left: 4px solid #8b5a2b;
+        }
+        .info h4 {
+            margin: 0 0 8px;
+            color: #8b5a2b;
+            font-size: 16px;
+        }
+        .info p {
+            margin: 5px 0;
+            font-size: 13px;
+            color: #555;
+        }
+        .legend {
+            line-height: 22px;
+            color: #555;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        .legend h4 {
+            margin: 0 0 8px;
+            color: #8b5a2b;
+        }
+        .legend i {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.8;
+        }
+        .legend .line {
+            width: 30px;
+            height: 3px;
+        }
+        .city-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            text-shadow:
+                -1px -1px 0 white,
+                1px -1px 0 white,
+                -1px 1px 0 white,
+                1px 1px 0 white,
+                2px 2px 3px rgba(0,0,0,0.3);
+            font-family: 'Georgia', serif;
+        }
+        .distance-label {
+            font-size: 11px;
+            background: rgba(255,255,255,0.9);
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: 1px solid #8b5a2b;
+            color: #8b5a2b;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>⁂ Al-Idrisi's Routes of Medieval Iberia ⁂</h1>
+            <div class="subtitle">From "Nuzhat al-Mushtaq fi Ikhtiraq al-Afaq" (12th Century)</div>
+        </div>
+    </div>
+    <div id="map"></div>
+    <script>
+        // Initialize map centered on Iberia
+        var map = L.map('map').setView([38.95922307692308, -3.7839153846153843], 6);
+
+        // Add historical-style map tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 18
+        }).addTo(map);
+
+        // Add info panel
+        var info = L.control({position: 'topright'});
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+
+        info.update = function (props) {
+            this._div.innerHTML =
+                '<h4>Abu Abdullah al-Idrisi</h4>' +
+                '<p><em>Geographer at the Court of Roger II of Sicily</em></p>' +
+                '<p>This map shows typical medieval routes<br/>' +
+                'described in al-Idrisi\'s geographic work<br/>' +
+                'documenting 12th century al-Andalus</p>' +
+                '<p style="font-size:11px; margin-top:10px; color:#888;">' +
+                'Distances: milles (miles) or journées (days of travel)</p>';
+        };
+
+        info.addTo(map);
+
+        // City locations
+        var locations = {"C\u00f3rdoba": {"lat": 37.8882, "lon": -4.7794}, "Granada": {"lat": 37.1773, "lon": -3.5986}, "Sevilla": {"lat": 37.3891, "lon": -5.9845}, "Toledo": {"lat": 39.8628, "lon": -4.0273}, "M\u00e1laga": {"lat": 36.7213, "lon": -4.4214}, "Valencia": {"lat": 39.4699, "lon": -0.3763}, "Murcia": {"lat": 37.9922, "lon": -1.1307}, "Madrid": {"lat": 40.4168, "lon": -3.7038}, "Lisboa": {"lat": 38.7223, "lon": -9.1393}, "M\u00e9rida": {"lat": 38.9167, "lon": -6.3433}, "Barcelona": {"lat": 41.3851, "lon": 2.1734}, "Zaragoza": {"lat": 41.6488, "lon": -0.8891}, "Badajoz": {"lat": 38.8794, "lon": -6.9706}};
+
+        // Add city markers
+        for (var name in locations) {
+            var loc = locations[name];
+
+            // City marker
+            L.circleMarker([loc.lat, loc.lon], {
+                radius: 7,
+                fillColor: "#d4af37",
+                color: "#8b5a2b",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.9
+            })
+            .bindPopup("<b>" + name + "</b><br/><em>Medieval city of al-Andalus</em>")
+            .addTo(map);
+
+            // City label
+            L.marker([loc.lat, loc.lon], {
+                icon: L.divIcon({
+                    className: 'label',
+                    html: '<div class="city-label">' + name + '</div>',
+                    iconSize: [100, 20],
+                    iconAnchor: [50, -10]
+                })
+            }).addTo(map);
+        }
+
+        // Routes data
+        var routes = [{"from_name": "C\u00f3rdoba", "from_lat": 37.8882, "from_lon": -4.7794, "to_name": "Granada", "to_lat": 37.1773, "to_lon": -3.5986, "distance": 3, "unit": "journ\u00e9es", "page": "t\u00edpica", "notes": "Major route in medieval al-Andalus"}, {"from_name": "C\u00f3rdoba", "from_lat": 37.8882, "from_lon": -4.7794, "to_name": "Sevilla", "to_lat": 37.3891, "to_lon": -5.9845, "distance": 2, "unit": "journ\u00e9es", "page": "sample", "notes": "Important commercial route"}, {"from_name": "Sevilla", "from_lat": 37.3891, "from_lon": -5.9845, "to_name": "Toledo", "to_lat": 39.8628, "to_lon": -4.0273, "distance": 5, "unit": "journ\u00e9es", "page": "sample", "notes": "Route to former Visigothic capital"}, {"from_name": "Granada", "from_lat": 37.1773, "from_lon": -3.5986, "to_name": "M\u00e1laga", "to_lat": 36.7213, "to_lon": -4.4214, "distance": 30, "unit": "milles", "page": "sample", "notes": "Coastal access route"}, {"from_name": "Valencia", "from_lat": 39.4699, "from_lon": -0.3763, "to_name": "Murcia", "to_lat": 37.9922, "to_lon": -1.1307, "distance": 40, "unit": "milles", "page": "sample", "notes": "Eastern coastal route"}, {"from_name": "Toledo", "from_lat": 39.8628, "from_lon": -4.0273, "to_name": "Madrid", "to_lat": 40.4168, "to_lon": -3.7038, "distance": 20, "unit": "milles", "page": "sample", "notes": "Central Iberian route"}, {"from_name": "Lisboa", "from_lat": 38.7223, "from_lon": -9.1393, "to_name": "M\u00e9rida", "to_lat": 38.9167, "to_lon": -6.3433, "distance": 4, "unit": "journ\u00e9es", "page": "sample", "notes": "Portuguese-Spanish connection"}, {"from_name": "Barcelona", "from_lat": 41.3851, "from_lon": 2.1734, "to_name": "Zaragoza", "to_lat": 41.6488, "to_lon": -0.8891, "distance": 70, "unit": "milles", "page": "sample", "notes": "Northeastern route"}, {"from_name": "Zaragoza", "from_lat": 41.6488, "from_lon": -0.8891, "to_name": "Valencia", "to_lat": 39.4699, "to_lon": -0.3763, "distance": 3, "unit": "journ\u00e9es", "page": "sample", "notes": "Ebro valley route"}, {"from_name": "C\u00f3rdoba", "from_lat": 37.8882, "from_lon": -4.7794, "to_name": "Badajoz", "to_lat": 38.8794, "to_lon": -6.9706, "distance": 60, "unit": "milles", "page": "sample", "notes": "Western route"}];
+
+        // Add routes
+        routes.forEach(function(route) {
+            var latlngs = [
+                [route.from_lat, route.from_lon],
+                [route.to_lat, route.to_lon]
+            ];
+
+            // Draw route line
+            var polyline = L.polyline(latlngs, {
+                color: '#8b5a2b',
+                weight: 3,
+                opacity: 0.7,
+                dashArray: '10, 5'
+            }).addTo(map);
+
+            // Popup with route info
+            polyline.bindPopup(
+                "<div style='font-family: Georgia, serif;'>" +
+                "<b style='color:#8b5a2b;'>Route:</b> " + route.from_name + " → " + route.to_name + "<br/>" +
+                "<b style='color:#8b5a2b;'>Distance:</b> " + route.distance + " " + route.unit + "<br/>" +
+                "<em style='font-size:11px; color:#666;'>" + route.notes + "</em>" +
+                "</div>"
+            );
+
+            // Add distance label at midpoint
+            var midLat = (route.from_lat + route.to_lat) / 2;
+            var midLon = (route.from_lon + route.to_lon) / 2;
+
+            L.marker([midLat, midLon], {
+                icon: L.divIcon({
+                    className: 'distance-label-marker',
+                    html: '<div class="distance-label">' +
+                          route.distance + ' ' + route.unit + '</div>',
+                    iconSize: [70, 20]
+                })
+            }).addTo(map);
+        });
+
+        // Add legend
+        var legend = L.control({position: 'bottomright'});
+
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend');
+            div.innerHTML =
+                '<h4>Legend</h4>' +
+                '<i style="background:#d4af37; border-radius: 50%; border: 2px solid #8b5a2b;"></i> Cities<br>' +
+                '<i class="line" style="background:#8b5a2b;"></i> Trade Routes<br>' +
+                '<hr style="margin: 8px 0;">' +
+                '<div style="font-size:12px; color:#666;">' +
+                '<strong>Total Routes:</strong> ' + routes.length + '<br>' +
+                '<strong>Cities:</strong> ' + Object.keys(locations).length + '<br>' +
+                '<strong>Period:</strong> 12th Century' +
+                '</div>';
+            return div;
+        };
+
+        legend.addTo(map);
+    </script>
+</body>
+</html>
