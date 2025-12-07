@@ -4,6 +4,11 @@ on:
   # Manual trigger from GitHub UI
   workflow_dispatch:
     inputs:
+      branch:
+        description: 'Branch containing extraction scripts'
+        required: true
+        default: 'claude/handle-large-pdfs-01Es3EFsDahj82QNq5J6c7Vk'
+        type: string
       script:
         description: 'Extraction script to run'
         required: true
@@ -15,21 +20,21 @@ on:
           - extract_iberian_with_ocr.py
           - ocr_fourth_climate.py
 
-  # Auto-run when Python scripts change on the main extraction branch
-  push:
-    branches:
-      - 'claude/handle-large-pdfs-*'
-    paths:
-      - '*.py'
-      - 'requirements.txt'
-
 jobs:
   extract:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the branch that has the scripts
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: List files before extraction
+        run: |
+          echo "=== Files before extraction ==="
+          ls -la *.json *.txt 2>/dev/null || echo "No JSON/TXT files yet"
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -64,14 +69,35 @@ jobs:
       # Verify docling installation
       - name: Verify docling
         run: |
-          python -c "from docling.document_converter import DocumentConverter; print('Docling installed successfully')"
+          python -c "from docling.document_converter import DocumentConverter; print('✓ Docling installed successfully')"
 
       # Run extraction script
       - name: Run extraction
         run: |
-          SCRIPT="${{ github.event.inputs.script || 'extract_fourth_climate_docling.py' }}"
+          SCRIPT="${{ github.event.inputs.script }}"
+          echo "========================================"
           echo "Running: python $SCRIPT"
+          echo "========================================"
           python "$SCRIPT"
+
+      - name: List files after extraction
+        run: |
+          echo "=== Files after extraction ==="
+          ls -la *.json *.txt 2>/dev/null || echo "No JSON/TXT files"
+          echo ""
+          echo "=== New/modified files ==="
+          git status --short
+
+      # Upload outputs as artifacts (always available for download)
+      - name: Upload extraction results
+        uses: actions/upload-artifact@v4
+        with:
+          name: extraction-results
+          path: |
+            *.json
+            *.txt
+            *.html
+          if-no-files-found: warn
 
       # Commit results back to the repository
       - name: Commit extracted content
@@ -82,10 +108,15 @@ jobs:
           # Add all output files (JSON, TXT, HTML)
           git add -A *.json *.txt *.html extracted_content/ 2>/dev/null || true
 
+          # Show what will be committed
+          echo "=== Staged changes ==="
+          git diff --staged --stat || echo "No staged changes"
+
           # Check if there are changes to commit
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "No new changes to commit"
           else
             git commit -m "Extract PDF content via docling [automated]"
             git push
+            echo "✓ Changes committed and pushed"
           fi
