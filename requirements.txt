@@ -1,0 +1,12 @@
+# Core PDF Processing
+PyMuPDF>=1.23.0
+Pillow>=10.0.0
+
+# Configuration
+PyYAML>=6.0
+
+# Progress tracking
+tqdm>=4.65.0
+
+# OCR support for text extraction
+pytesseract>=0.3.10

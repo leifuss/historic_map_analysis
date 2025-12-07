@@ -7,7 +7,7 @@ on:
       branch:
         description: 'Branch containing extraction scripts'
         required: true
-        default: 'claude/handle-large-pdfs-01Es3EFsDahj82QNq5J6c7Vk'
+        default: 'claude/check-latest-updates-01JNRH2UfToa71GHZNBke7mj'
         type: string
       script:
         description: 'Extraction script to run'
