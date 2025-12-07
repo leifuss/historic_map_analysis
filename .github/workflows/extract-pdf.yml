@@ -4,6 +4,11 @@ on:
   # Manual trigger from GitHub UI
   workflow_dispatch:
     inputs:
+      branch:
+        description: 'Branch containing extraction scripts'
+        required: true
+        default: 'claude/handle-large-pdfs-01Es3EFsDahj82QNq5J6c7Vk'
+        type: string
       script:
         description: 'Extraction script to run'
         required: true
@@ -15,21 +20,16 @@ on:
           - extract_iberian_with_ocr.py
           - ocr_fourth_climate.py
 
-  # Auto-run when Python scripts change on the main extraction branch
-  push:
-    branches:
-      - 'claude/handle-large-pdfs-*'
-    paths:
-      - '*.py'
-      - 'requirements.txt'
-
 jobs:
   extract:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the branch that has the scripts
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -69,7 +69,7 @@ jobs:
       # Run extraction script
       - name: Run extraction
         run: |
-          SCRIPT="${{ github.event.inputs.script || 'extract_fourth_climate_docling.py' }}"
+          SCRIPT="${{ github.event.inputs.script }}"
           echo "Running: python $SCRIPT"
           python "$SCRIPT"
 
