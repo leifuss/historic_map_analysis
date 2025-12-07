@@ -1,0 +1,91 @@
+name: Extract PDF Content with Docling
+
+on:
+  # Manual trigger from GitHub UI
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'Extraction script to run'
+        required: true
+        default: 'extract_fourth_climate_docling.py'
+        type: choice
+        options:
+          - extract_fourth_climate_docling.py
+          - extract_iberian_content.py
+          - extract_iberian_with_ocr.py
+          - ocr_fourth_climate.py
+
+  # Auto-run when Python scripts change on the main extraction branch
+  push:
+    branches:
+      - 'claude/handle-large-pdfs-*'
+    paths:
+      - '*.py'
+      - 'requirements.txt'
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Cache pip packages - docling + PyTorch is ~2.5GB
+      # This cache persists for 7 days, making subsequent runs much faster
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.local/lib/python3.11/site-packages
+          key: ${{ runner.os }}-pip-docling-v1-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-docling-v1-
+
+      # Install system dependencies for OCR
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-fra tesseract-ocr-ara
+
+      # Install Python dependencies
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install docling
+          pip install -r requirements.txt
+
+      # Verify docling installation
+      - name: Verify docling
+        run: |
+          python -c "from docling.document_converter import DocumentConverter; print('Docling installed successfully')"
+
+      # Run extraction script
+      - name: Run extraction
+        run: |
+          SCRIPT="${{ github.event.inputs.script || 'extract_fourth_climate_docling.py' }}"
+          echo "Running: python $SCRIPT"
+          python "$SCRIPT"
+
+      # Commit results back to the repository
+      - name: Commit extracted content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add all output files (JSON, TXT, HTML)
+          git add -A *.json *.txt *.html extracted_content/ 2>/dev/null || true
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Extract PDF content via docling [automated]"
+            git push
+          fi
